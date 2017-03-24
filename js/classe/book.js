@@ -3,6 +3,7 @@
  * @constructor
  */
 let Book = function(){
+	this._id;								// string
 	this.title;							// string
 	this.author;						// string
 	this.isbn;							// string
@@ -14,9 +15,13 @@ let Book = function(){
 	this.page;							// int
 	this.summary;						// string
 	this.cover;							// string src img
-	this.rating;            // double
+	this.rating;						// double
 	this.opinions = [];			// Opinion[?]
 	this.language;					// string
+};
+Book.prototype._id = function(_id){
+	this._id = _id;
+	return this;
 };
 Book.prototype.title = function(title){
 	this.title = title;
@@ -50,6 +55,10 @@ Book.prototype.publisher = function(publisher){
 };
 Book.prototype.publicationDate = function(year, month, day){
 	this.publicationDate = new Date(year, month, day);
+	return this;
+};
+Book.prototype.publicationDateIso = function(dateIso){
+	this.publicationDate = new Date(dateIso);
 	return this;
 };
 Book.prototype.publicationCountry = function(country){
@@ -86,6 +95,10 @@ Book.prototype.rating = function(rate){
 };
 Book.prototype.opinion = function(consumer, message){
 	this.opinions.push(new Opinion().advise(message).consumer(consumer).publishDate(new Date()));
+	return this;
+};
+Book.prototype.opinionT = function(opinion){
+	this.opinions.push(opinion);
 	return this;
 };
 Book.prototype.equals = function(book){

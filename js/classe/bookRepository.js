@@ -1,6 +1,8 @@
 let MongoClient = require("mongodb").MongoClient;
 let assert = require("assert");
 let Book = require('./Book');
+let Opinion = require('./Opinion');
+let Consumer = require('./Consumer');
 
 /**
  * Representes a book repository and store all books from database.
@@ -149,6 +151,21 @@ BookRepository.prototype.remove = function(book){
 	}
 };
 /**
+ * Add book(s) in repository
+ * @function add
+ * @param {Book || Book[?]} book [description]
+ * @return {void}          			 [description]
+ */
+BookRepository.prototype.add = function(book){
+	if(Array.isArray(book)){ // case Book[?]
+		for(let i in book[i]){
+			this.books.push(book[i]);
+		}
+	}else{									 // case Book
+		this.books.push(book);
+	}
+}
+/**
  * Return index of a book in books
  * @function indexOf
  * @override
@@ -163,8 +180,26 @@ BookRepository.prototype.indexOf = function(book){
 	}
 	return -1;
 };
-BookRepository.prototype.saveBooks = function(books){
-	this.books.concat(books);
+/**
+ * Load and convert raw data from database to books
+ * @param  {Object} books [description]
+ * @return {void}         [description]
+ */
+BookRepository.prototype.loadBooks = function(books){
+	for(let i in books){
+		let bookToInsert = new Book()._id(books[i]._id).title(books[i].title).author(books[i].author).isbn(books[i].isbn)
+																	.publisher(books[i].publisher).publicationDateIso(books[i].publicationDate)
+																	.collection(books[i].collection).page(books[i].page).summary(books[i].summary)
+																	.cover(books[i].cover).rating(books[i].rating).language(books[i].language).genre(books[i].genres);
+		for(let j in books[i].opinions){
+			let opinionToInsert = new Opinion().advise(books[i].opinions[j].advise).publishDate(books[i].opinions[j].publishDate);
+			let consumerToInsert = new Consumer().pseudo(books[i].opinions[j].consumer.pseudo);
+			opinionToInsert.consumer(consumerToInsert);
+			bookToInsert.opinionT(opinionToInsert);
+		}
+		this.add(bookToInsert);
+	}
+	console.log(this);
 };
 
 let loadBook = function(){
@@ -172,7 +207,7 @@ let loadBook = function(){
 		let collection = db.collection(BookRepository.COLLECTION);
 		return collection.find().toArray();
 	}).then(function(books){
-		bookRepository.saveBooks();
+		bookRepository.loadBooks(books);
 	}).catch(function(error){
 		console.log(error);
 	});

@@ -15,3 +15,5 @@ Opinion.prototype.publishDate = function(date){
 	this.publishDate = date;
 	return this;
 };
+
+module.exports = Opinion;
