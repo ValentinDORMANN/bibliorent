@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../img/favicon.ico">
+
+    <title>BiblioRent</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../external/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../css/jumbotron.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- add icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+
+  <body>
+
+    <form class="form-horizontal col-md-4">
+      <div class="form-group has-feedback"><!-- has-success has-warning has-error -->
+        <label class="control-label" for="username">Username</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+          <input id="input_username" name="username" type="text" placeholder="username" class="form-control input-md" required=""> 
+        </div>
+        <!--<span class="glyphicon form-control-feedback glyphicon-ok" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-warning-sign" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>-->
+      </div>
+
+      <div class="form-group has-feedback"><!-- has-success has-warning has-error -->
+        <label class="control-label" for="password">Password</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+          <input id="input_password1" name="password" type="password" placeholder="**********" class="form-control input-md" required=""> 
+        </div>
+        <!--<span class="glyphicon form-control-feedback glyphicon-ok" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-warning-sign" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>-->
+      </div>
+
+      <div class="form-group has-feedback"><!-- has-success has-warning has-error -->
+        <label class="control-label" for="password">Password</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+          <input id="input_password2" name="password" type="password" placeholder="**********" class="form-control input-md" required=""> 
+        </div>
+        <!--<span class="glyphicon form-control-feedback glyphicon-ok" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-warning-sign" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>-->
+      </div>
+
+      <div class="form-group has-feedback"><!-- has-success has-warning has-error -->
+        <label class="control-label" for="firstname">Firstname</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+          <input id="input_firstname" name="firstname" type="text" placeholder="Firstname" class="form-control input-md" required=""> 
+        </div>
+        <!--<span class="glyphicon form-control-feedback glyphicon-ok" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-warning-sign" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>-->
+      </div>
+
+      <div class="form-group has-feedback"><!-- has-success has-warning has-error -->
+        <label class="control-label" for="lastname">Lastname</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+          <input id="input_lastname" name="lastname" type="text" placeholder="Lastname" class="form-control input-md" required=""> 
+        </div>
+        <!--<span class="glyphicon form-control-feedback glyphicon-ok" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-warning-sign" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>-->
+      </div>
+
+      <div class="form-group has-feedback"><!-- has-success has-warning has-error -->
+        <label class="control-label" for="email">E-Mail</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+          <input id="input_e-mail" name="firstname" type="email" placeholder="firstname.name@domain.fr" class="form-control input-md" required=""> 
+        </div>
+        <!--<span class="glyphicon form-control-feedback glyphicon-ok" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-warning-sign" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>-->
+      </div>
+
+      <div class="form-group has-feedback"><!-- has-success has-warning has-error -->
+        <label class="control-label" for="email">BirthDate</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+          <input id="input_birthdate" name="firstname" type="date"  class="form-control input-md" required=""> 
+        </div>
+        <!--<span class="glyphicon form-control-feedback glyphicon-ok" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-warning-sign" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>-->
+      </div>
+
+      <div class="form-group has-feedback"><!-- has-success has-warning has-error -->
+        <label class="control-label" for="gender">Gender</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-venus" aria-hidden="true"></i></span>
+          <select class="form-control">
+            <option value="?">Undefined</option>
+            <option value="M">Male</option>
+            <option value="W">Female</option>
+          </select>
+        </div>
+        <!--<span class="glyphicon form-control-feedback glyphicon-ok" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-warning-sign" aria-hidden="true"></span>-->
+        <!--<span class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>-->
+      </div>
+
+
+      <div class="form-group">
+        <label class="control-label" for="register"></label>
+        <div class="input-group">
+          <button id="regis" name="regis" class="btn btn-success">Register</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../external/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

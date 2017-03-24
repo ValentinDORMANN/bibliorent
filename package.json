@@ -1,0 +1,19 @@
+{
+  "name": "bibliorent",
+  "version": "1.0.0",
+  "description": "BiblioRent",
+  "main": "index.js",
+  "dependencies": {
+    "common-utils": "0.0.2",
+    "mongodb": "^2.2.25",
+    "mongosync": "^1.1.3",
+    "node": "^0.0.0",
+    "synchronize": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "valentin dormann",
+  "license": "ISC"
+}
