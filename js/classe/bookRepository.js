@@ -1,5 +1,4 @@
 let MongoClient = require("mongodb").MongoClient;
-let assert = require("assert");
 let Book = require('./Book');
 let Opinion = require('./Opinion');
 let Consumer = require('./Consumer');
@@ -10,10 +9,7 @@ let Consumer = require('./Consumer');
  */
 let BookRepository = function(){
 	this.books = [];		// Book[?]
-	// TODO populate books with books come from db (this.loadBooks)
-	/*let myBook = new Book().title('La symphonie des siècles: Rhapsody').author('Elizabeth Haydon').isbn('9782756400242').publisher('Pygmalion').publicationDate(2000,9,15).publicationCountry('USA').collection('Fantasy').page(656).summary("Tandis qu'elle enfile les rues d'Easton à toute allure pour fuir les hommes de Michael, un ancien amant devenu baron de la pègre locale, Rhapsody butte sur deux étranges personnages, qui l'aideront à régler son problème de façon ... définitive. Ce qu'elle ignore, c'est qu'Achmed le Serpent et Grunthor, le géant Firbolg, sont eux-mêmes confrontés à une situation autrement périlleuse. Aussi, lorsqu'ils l'entraînent dans un voyage au coeur de la Terre le long des racines de Sagia, l'Arbre-Monde, Rhapsody se demande si elle n'a pas fait preuve d'un excès de confiance...").language('FR').cover('https://images.noosfere.org/couv/p/pygmalion0024-2006.jpg').genre('Roman').genre('Fantasy').rating(3.95);
-	let myBook2 = new Book().title('La symphonie des siècles: Prophecy').author('Elizabeth Haydon').isbn('9782756400273').publisher('Pygmalion').publicationDate(2000,9,15).publicationCountry('USA').collection('Fantasy').page(390).summary("Quoique leur périple au cœur du monde n’ait duré à leurs yeux que quelques années, quatorze siècles se sont en réalité écoulés depuis le départ des trois compagnons de l’île de Serendair ! Sur les conseils de Llauron, le patriarche d’une bien étrange religion, la jeune Baptistrelle et ses acolytes ont pris la route de Roland, puis celle de Canriff, l’ancienne capitale des Cymriens. Achmed et Grunthor nourrissent le projet d’y rallier sous une seule et même bannière les différentes tribus bolgs des montagnes et de ressusciter la grande nation qui fut la leur. Mais il faudra compter avec une nouvelle recrue, au caractère aussi trempé que l’acier des couteaux qu’elle lance avec une précision mortelle…").language('FR').cover('https://images-na.ssl-images-amazon.com/images/I/51n9O9TD%2BqL._AC_UL320_SR202,320_.jpg').genre('Roman').genre('Fantasy').rating(3.95);
-	this.books.push(myBook, myBook2);*/
+	loadBook();
 }
 /**
  * @constant  {String}
@@ -22,7 +18,7 @@ BookRepository.COLLECTION = "biblio.book";
 /**
  * @constant  {String}
  */
-BookRepository.URL_DB = "mongodb://localhost:27017/biblio";
+BookRepository.URL_DB = "mongodb://127.0.0.1:27017/biblio";
 /**
  * Find a book in its own collection by looking for world matches in title's book
  * @function findByTitleKey
@@ -115,13 +111,7 @@ BookRepository.prototype.findByGenre = function(genre){
  */
 BookRepository.prototype.storeBook = function(book){
 	MongoClient.connect(BookRepository.URL_DB, function(error, db){
-		assert.equal(null, error);
-		console.log("[MSG] Server connection successful");
 		db.collection(BookRepository.COLLECTION).insertOne(book, function(error, row){
-			assert.equal(null, error);
-			console.log("[MSG] Collection connection successful");
-			assert.equal(1, row.insertedCount);
-			console.log("[MSG] Insertion successful");
 			db.close();
 		});
 	});
@@ -186,6 +176,7 @@ BookRepository.prototype.indexOf = function(book){
  * @return {void}         [description]
  */
 BookRepository.prototype.loadBooks = function(books){
+	// TODO improve conversion
 	for(let i in books){
 		let bookToInsert = new Book()._id(books[i]._id).title(books[i].title).author(books[i].author).isbn(books[i].isbn)
 																	.publisher(books[i].publisher).publicationDateIso(books[i].publicationDate)
@@ -209,9 +200,10 @@ let loadBook = function(){
 	}).then(function(books){
 		bookRepository.loadBooks(books);
 	}).catch(function(error){
-		console.log(error);
+		console.log("[ERR] "+error);
 	});
 };
+
 /**
  * Representes book not found exception caused by all cases (missing criteria, not good criteria, incomplete search)
  * @param {string} message [description]
@@ -226,28 +218,8 @@ BookNotFoundError.prototype = Object.create(Error.prototype);
 
 module.exports = BookRepository;
 
-
-/*let loadBookPomise = function(){
-	return MongoClient.connect(BookRepository.URL_DB).then(function(db){
-		let collection = db.collection(BookRepository.COLLECTION);
-		return collection.find().toArray();
-	}).then(function(books){
-		return books;
-	}).catch(function(error){
-		console.log(error);
-	});
-};*/
  
 // ========================= TEST ==============================
 let bookRepository = new BookRepository();
-loadBook();
-let myBook2 = new Book().title('La symphonie des siècles: Prophecy').author('Elizabeth Haydon').isbn('9782756400273').publisher('Pygmalion').publicationDate(2000,9,15).publicationCountry('USA').collection('Fantasy').page(390).summary("Quoique leur périple au cœur du monde n’ait duré à leurs yeux que quelques années, quatorze siècles se sont en réalité écoulés depuis le départ des trois compagnons de l’île de Serendair ! Sur les conseils de Llauron, le patriarche d’une bien étrange religion, la jeune Baptistrelle et ses acolytes ont pris la route de Roland, puis celle de Canriff, l’ancienne capitale des Cymriens. Achmed et Grunthor nourrissent le projet d’y rallier sous une seule et même bannière les différentes tribus bolgs des montagnes et de ressusciter la grande nation qui fut la leur. Mais il faudra compter avec une nouvelle recrue, au caractère aussi trempé que l’acier des couteaux qu’elle lance avec une précision mortelle…").language('FR').cover('https://images-na.ssl-images-amazon.com/images/I/51n9O9TD%2BqL._AC_UL320_SR202,320_.jpg').genre('Roman').genre('Fantasy').rating(3.95);
+//let myBook2 = new Book().title('La symphonie des siècles: Prophecy').author('Elizabeth Haydon').isbn('9782756400273').publisher('Pygmalion').publicationDate(2000,9,15).publicationCountry('USA').collection('Fantasy').page(390).summary("Quoique leur périple au cœur du monde n’ait duré à leurs yeux que quelques années, quatorze siècles se sont en réalité écoulés depuis le départ des trois compagnons de l’île de Serendair ! Sur les conseils de Llauron, le patriarche d’une bien étrange religion, la jeune Baptistrelle et ses acolytes ont pris la route de Roland, puis celle de Canriff, l’ancienne capitale des Cymriens. Achmed et Grunthor nourrissent le projet d’y rallier sous une seule et même bannière les différentes tribus bolgs des montagnes et de ressusciter la grande nation qui fut la leur. Mais il faudra compter avec une nouvelle recrue, au caractère aussi trempé que l’acier des couteaux qu’elle lance avec une précision mortelle…").language('FR').cover('https://images-na.ssl-images-amazon.com/images/I/51n9O9TD%2BqL._AC_UL320_SR202,320_.jpg').genre('Roman').genre('Fantasy').rating(3.95);
 //bookRepository.storeBook(myBook2);
-/*loadBooks().then(function(books){
-	//console.info("promise fillfull with books", books);
-	for(index in books){
-		console.log("("+index+") ISBN "+books[index].isbn);
-	}
-}, function(error){
-	console.error("promise rejected", error);
-});*/
