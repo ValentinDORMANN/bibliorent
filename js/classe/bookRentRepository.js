@@ -1,9 +1,16 @@
+let MongoClient = require("mongodb").MongoClient;
+let BookRent = require('./BookRent');
+let Consumer = require('./Consumer');
+let Book = require('./Book');
+let Opinion = require('./Opinion');
+
 /**
  * Representes a book's rent repository and store all rents from database
  * @constructor
  */
 let BookRentRepository = function(){
 	this.bookRents = [];	// BookRent[?]
+	loadBookRent();
 }
 /**
  * @constant  {String}
@@ -12,7 +19,7 @@ BookRentRepository.COLLECTION = "biblio.bookrent";
 /**
  * @constant  {String}
  */
-BookRentRepository.URL_DB = "mongodb://localhost:27017/biblio";
+BookRentRepository.URL_DB = "mongodb://127.0.0.1:27017/biblio";
 /**
  * Find a book rent by retrival date
  * @function findByRetrivalDate
@@ -93,13 +100,7 @@ BookRentRepository.prototype.isSameDate = function(date1, date2){
  */
 BookRentRepository.prototype.storeBookRent = function(bookRent){
 	MongoClient.connect(BookRentRepository.URL_DB, function(error, db){
-		assert.equal(null, error);
-		console.log("[MSG] Server connection successful");
 		db.collection(BookRentRepository.COLLECTION).insertOne(bookRent, function(error, row){
-			assert.equal(null, error);
-			console.log("[MSG] Collection connection successful");
-			assert.equal(1, row.insertedCount);
-			console.log("[MSG] Insertion successful");
 			db.close();
 		});
 	});
@@ -111,6 +112,43 @@ BookRentRepository.prototype.storeBookRent = function(bookRent){
  */
 BookRentRepository.prototype.add = function(bookRent){
 	this.bookRents.push(bookRent);
+};
+BookRentRepository.prototype.loadBookRents = function(bookRents){
+	// TODO improve conversion
+	for(let i in bookRents){
+		let bookRentToInsert = new BookRent()._id(bookRents[i]._id).isPay(bookRents[i].isPaid)
+		                                     .retrivalDateIso(bookRents[i].retrivalDate).rentDateIso(bookRents[i].retrivalDate);
+		let consumerToInsert = new Consumer().pseudo(bookRents[i].consumer.pseudo);
+		bookRentToInsert.consumer(consumerToInsert);
+		for(let j in bookRents[i].books){
+			let bookToInsert = new Book()._id(bookRents[i].books[j]._id).title(bookRents[i].books[j].title).author(bookRents[i].books[j].author)
+			                             .isbn(bookRents[i].books[j].isbn).publisher(bookRents[i].books[j].publisher)
+			                             .publicationDateIso(bookRents[i].books[j].publicationDate)
+																	 .collection(bookRents[i].books[j].collection).page(bookRents[i].books[j].page)
+																	 .summary(bookRents[i].books[j].summary).cover(bookRents[i].books[j].cover)
+																	 .rating(bookRents[i].books[j].rating).language(bookRents[i].books[j].language).genre(bookRents[i].books[j].genres);
+			for(let k in bookRents[i].books[j].opinions){
+				let opinionToInsert = new Opinion().advise(bookRents[i].books[j].opinions[k].advise).publishDate(bookRents[i].books[j].opinions[k].publishDate);
+				let consumerToInsert = new Consumer().pseudo(bookRents[i].books[j].opinions[k].consumer.pseudo);
+				opinionToInsert.consumer(consumerToInsert);
+				bookToInsert.opinionT(opinionToInsert);
+			}
+			bookRentToInsert.book(bookToInsert);
+		}
+		this.add(bookRentToInsert);
+	}
+	console.log(this);
+};
+
+let loadBookRent = function(){
+	return MongoClient.connect(BookRentRepository.URL_DB).then(function(db){
+		let collection = db.collection(BookRentRepository.COLLECTION);
+		return collection.find().toArray();
+	}).then(function(bookRents){
+		bookRentRepository.loadBookRents(bookRents);
+	}).catch(function(error){
+		console.log("[ERR] "+error);
+	});
 };
 
 /**
@@ -127,3 +165,7 @@ BookRentalNotFoundError.prototype = Object.create(Error.prototype);
 
 
 module.exports = BookRentRepository;
+
+
+// ========================= TEST ==============================
+let bookRentRepository = new BookRentRepository();
