@@ -1,4 +1,5 @@
 let MongoClient = require("mongodb").MongoClient;
+let assert = require('assert');
 let Book = require('./Book');
 let Opinion = require('./Opinion');
 let Consumer = require('./Consumer');
@@ -111,7 +112,10 @@ BookRepository.prototype.findByGenre = function(genre){
  */
 BookRepository.prototype.storeBook = function(book){
 	MongoClient.connect(BookRepository.URL_DB, function(error, db){
+		assert.equal(null, error);
 		db.collection(BookRepository.COLLECTION).insertOne(book, function(error, row){
+			assert.equal(null, error);
+			assert.equal(1, row.insertedCount);
 			db.close();
 		});
 	});
@@ -190,7 +194,6 @@ BookRepository.prototype.loadBooks = function(books){
 		}
 		this.add(bookToInsert);
 	}
-	console.log(this);
 };
 
 let loadBook = function(){
