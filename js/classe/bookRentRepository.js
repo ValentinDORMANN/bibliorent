@@ -1,4 +1,5 @@
 let MongoClient = require("mongodb").MongoClient;
+let assert = require('assert');
 let BookRent = require('./BookRent');
 let Consumer = require('./Consumer');
 let Book = require('./Book');
@@ -137,7 +138,6 @@ BookRentRepository.prototype.loadBookRents = function(bookRents){
 		}
 		this.add(bookRentToInsert);
 	}
-	console.log(this);
 };
 
 let loadBookRent = function(){
