@@ -87,7 +87,7 @@ BookRent.prototype.equals = function(bookRent){
 BookRent.prototype.getRetrivalDate = function(){ return this.retrivalDate; };
 BookRent.prototype.getRentDate = function(){ return this.rentDate; };
 BookRent.prototype.getConsumer = function(){ return this.consumer; };
-
+BookRent.prototype.getAllBooks = function(){ return this.books; };
 
 
 module.exports = BookRent;
