@@ -32,13 +32,13 @@
           <div class="form-group">
             <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="card_holder_name" id="card_holder_name_insert" placeholder="Card Holder's Name">
+              <input type="text" class="form-control" name="card_holder_name" id="card_holder_name_insert" placeholder="Card Holder's Name" required>
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-3 control-label" for="card-number">Card Number</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="card_number" id="card_number_insert" placeholder="Debit/Credit Card Number">
+              <input type="text" class="form-control" name="card_number" id="card_number_insert" placeholder="Debit/Credit Card Number" required>
             </div>
           </div>
           <div class="form-group">
@@ -46,7 +46,7 @@
             <div class="col-sm-9">
               <div class="row">
                 <div class="col-xs-3">
-                  <select class="form-control col-sm-2" name="expiry_month" id="expiry_month_insert">
+                  <select class="form-control col-sm-2" name="expiry_month" id="expiry_month_insert" required>
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>
@@ -62,7 +62,7 @@
                   </select>
                 </div>
                 <div class="col-xs-3">
-                  <select class="form-control" name="expiry_year" id="expiry_day_insert">
+                  <select class="form-control" name="expiry_year" id="expiry_day_insert" required>
                     <option value="2013">2013</option>
                     <option value="2014">2014</option>
                     <option value="2015">2015</option>
@@ -82,7 +82,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" name="cvv" id="cvv_insert" placeholder="Security Code">
+              <input type="text" class="form-control" name="cvv" id="cvv_insert" placeholder="Security Code" required>
             </div>
           </div>
           <div class="form-group">
