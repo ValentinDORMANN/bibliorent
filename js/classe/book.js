@@ -1,4 +1,4 @@
-let Opinion = require('./Opinion');
+/*let Opinion = require('./Opinion');
 let Consumer = require('./Consumer');
 // Load jsdom, and create a window.
 let jsdom = require("jsdom").jsdom;
@@ -6,7 +6,7 @@ let doc = jsdom();
 let window = doc.defaultView;
 
 // Load jQuery with the simulated jsdom window.
-$ = require('jquery')(window);
+$ = require('jquery')(window);*/
 
 /**
  * Representes a book
@@ -51,6 +51,12 @@ Book.prototype.genre = function(genre){
 	}
 	return this;
 };
+/**
+ * Check if this book have already tagged x
+ * @function isGenreAlreadySet
+ * @param  {string}  genre [description]
+ * @return {Boolean}       [description]
+ */
 Book.prototype.isGenreAlreadySet = function(genre){
 	for(var elem in this.genre){
 		if(elem.toLowerCase() == genre.toLowerCase()){
@@ -128,7 +134,7 @@ Book.prototype.display = function(){
         								'<div class="panel-heading">'+
           								'<b>'+this.title+'</b>'+
           								'<p title="Auteur"><i class="fa fa-user fa-lg"></i>'+
-            							'<a href="#"><i>'+this.author+'</i></a><i class="fa fa-heart fa-4x pull-right"></i></p>'+
+            							'<a href="#"><i>&nbsp;'+this.author+'</i></a><i class="fa fa-heart fa-4x pull-right"></i></p>'+
                           '<p></p>'+
 												'</div>'+
         								'<div class="panel-body">'+
@@ -171,8 +177,7 @@ Book.prototype.display = function(){
   	htmlContent +=		'<span class="label '+COLOR_CSS[i%NB_COLOR_CSS]+'">'+this.genres[i]+'</span>'
   }
   htmlContent +=		'</p></div></div></div>';
-  console.log($("#cards_content"));
-	$("body").append(htmlContent);
+	$("#cards_content").append(htmlContent);
 };
 /**
  * Calculate rating in scale from 0 to 5 by step 0.5

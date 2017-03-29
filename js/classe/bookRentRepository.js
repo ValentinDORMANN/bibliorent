@@ -1,9 +1,9 @@
-let MongoClient = require("mongodb").MongoClient;
+/*let MongoClient = require("mongodb").MongoClient;
 let assert = require('assert');
 let BookRent = require('./BookRent');
 let Consumer = require('./Consumer');
 let Book = require('./Book');
-let Opinion = require('./Opinion');
+let Opinion = require('./Opinion');*/
 
 /**
  * Representes a book's rent repository and store all rents from database
@@ -11,7 +11,7 @@ let Opinion = require('./Opinion');
  */
 let BookRentRepository = function(){
 	this.bookRents = [];	// BookRent[?]
-	loadBookRent();
+	//loadBookRent();
 }
 /**
  * @constant  {String}

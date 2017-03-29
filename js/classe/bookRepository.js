@@ -1,8 +1,8 @@
-let MongoClient = require("mongodb").MongoClient;
+/*let MongoClient = require("mongodb").MongoClient;
 let assert = require('assert');
 let Book = require('./Book');
 let Opinion = require('./Opinion');
-let Consumer = require('./Consumer');
+let Consumer = require('./Consumer');*/
 
 /**
  * Representes a book repository and store all books from database.

@@ -18,9 +18,6 @@ app.get('/', function (req, res) {
 });
 app.get('/library', function (req, res) {
 	res.sendFile(path.join(__dirname + '/page/library.html'));
-	let library = new Library();
-	library.displayBooks();
-   	console.log(library);
 });
 
 app.listen(3000, function () {
