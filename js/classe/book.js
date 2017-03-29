@@ -163,7 +163,7 @@ Book.prototype.display = function(){
           					'<hr>'+
           					'<p></p>'+
           					'<div title="">'+
-            					'<a class="btn btn-block btn3d btn-danger"><i class="fa fa-shopping-cart fa-lg fa-fw"></i>Add to card</b></a>'+
+            					'<a href="./paymentForm.html" class="btn btn-block btn3d btn-danger"><i class="fa fa-shopping-cart fa-lg fa-fw"></i>Add to card</b></a>'+
           					'</div>'+
           					'<p></p><br>'+
           					'<p>';
