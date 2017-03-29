@@ -25,6 +25,9 @@
     <![endif]-->
     <!-- add icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+      img { max-width: 250px; max-height: 300px; } 
+    </style>
   </head>
 
   <body>
@@ -108,21 +111,6 @@
       </div>
     </div>
     </div>
-    <!--<SCRIPT type="text/javascript" src="../js/classe/book.js"></SCRIPT>
-    <SCRIPT type="text/javascript" src="../js/classe/bookRepository.js"></SCRIPT>
-    <SCRIPT type="text/javascript" src="../js/classe/bookRent.js"></SCRIPT>
-    <SCRIPT type="text/javascript" src="../js/classe/bookRentRepository.js"></SCRIPT>
-    <SCRIPT type="text/javascript" src="../js/classe/consumer.js"></SCRIPT>
-    <SCRIPT type="text/javascript" src="../js/classe/consumerAccount.js"></SCRIPT>
-    <SCRIPT type="text/javascript" src="../js/classe/library.js"></SCRIPT>
-    <SCRIPT type="text/javascript" src="../js/classe/opinion.js"></SCRIPT>
-    <SCRIPT type="text/javascript" src="../js/classe/address.js"></SCRIPT>
-    <script>
-      function render() {
-        var library = new Library();
-        library.displayBooks();
-      }
-    </script>-->
     <!-- Bootstrap core JavaScript ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -130,5 +118,19 @@
     <script src="../external/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../js/ie10-viewport-bug-workaround.js"></script>
+
+    <script type="text/javascript" src="../js/classe/book.js"></script>
+    <script type="text/javascript" src="../js/classe/bookRepository.js"></script>
+    <script type="text/javascript" src="../js/classe/bookRent.js"></script>
+    <script type="text/javascript" src="../js/classe/bookRentRepository.js"></script>
+    <script type="text/javascript" src="../js/classe/consumer.js"></script>
+    <script type="text/javascript" src="../js/classe/consumerAccount.js"></script>
+    <script type="text/javascript" src="../js/classe/library.js"></script>
+    <script type="text/javascript" src="../js/classe/opinion.js"></script>
+    <script type="text/javascript" src="../js/classe/address.js"></script>
+    <script type="text/javascript" charset="utf-8" async defer>
+      let library = new Library();
+      library.displayBooks();
+    </script>
   </body>
 </html>
