@@ -10,7 +10,7 @@ let Consumer = require('./Consumer');
  */
 let BookRepository = function(){
 	this.books = [];		// Book[?]
-	loadBook();
+	//this.loadBook();
 }
 /**
  * @constant  {String}
@@ -152,7 +152,7 @@ BookRepository.prototype.remove = function(book){
  */
 BookRepository.prototype.add = function(book){
 	if(Array.isArray(book)){ // case Book[?]
-		for(let i in book[i]){
+		for(let i in book){
 			this.books.push(book[i]);
 		}
 	}else{									 // case Book
@@ -195,8 +195,18 @@ BookRepository.prototype.loadBooks = function(books){
 		this.add(bookToInsert);
 	}
 };
+/**
+ * Dysplay all books from repository
+ * @function displayBooks
+ * @return {void} [description]
+ */
+BookRepository.prototype.displayBooks = function(){
+	for(let i in this.books){
+		this.books[i].display();
+	}
+};
 
-let loadBook = function(){
+BookRepository.prototype.loadBook = function(){
 	return MongoClient.connect(BookRepository.URL_DB).then(function(db){
 		let collection = db.collection(BookRepository.COLLECTION);
 		return collection.find().toArray();
@@ -223,6 +233,6 @@ module.exports = BookRepository;
 
  
 // ========================= TEST ==============================
-let bookRepository = new BookRepository();
+//let bookRepository = new BookRepository();
 //let myBook2 = new Book().title('La symphonie des siècles: Prophecy').author('Elizabeth Haydon').isbn('9782756400273').publisher('Pygmalion').publicationDate(2000,9,15).publicationCountry('USA').collection('Fantasy').page(390).summary("Quoique leur périple au cœur du monde n’ait duré à leurs yeux que quelques années, quatorze siècles se sont en réalité écoulés depuis le départ des trois compagnons de l’île de Serendair ! Sur les conseils de Llauron, le patriarche d’une bien étrange religion, la jeune Baptistrelle et ses acolytes ont pris la route de Roland, puis celle de Canriff, l’ancienne capitale des Cymriens. Achmed et Grunthor nourrissent le projet d’y rallier sous une seule et même bannière les différentes tribus bolgs des montagnes et de ressusciter la grande nation qui fut la leur. Mais il faudra compter avec une nouvelle recrue, au caractère aussi trempé que l’acier des couteaux qu’elle lance avec une précision mortelle…").language('FR').cover('https://images-na.ssl-images-amazon.com/images/I/51n9O9TD%2BqL._AC_UL320_SR202,320_.jpg').genre('Roman').genre('Fantasy').rating(3.95);
 //bookRepository.storeBook(myBook2);
